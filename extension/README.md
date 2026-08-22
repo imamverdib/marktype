@@ -10,7 +10,7 @@ as a custom editor so the IDE keeps owning tabs, saving, undo and themes.
 Install it from the Extensions view (search **MarkType**), or:
 
 ```bash
-antigravity-ide --install-extension behbudlu.marktype
+antigravity-ide --install-extension imamverdib.marktype
 ```
 
 ## Opening a document

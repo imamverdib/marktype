@@ -77,17 +77,17 @@ npm run ext:package      # builds and writes extension/marktype-0.1.0.vsix
 ```
 
 It is published on Open VSX as
-[`behbudlu.marktype`](https://open-vsx.org/extension/behbudlu/marktype), which is
+[`imamverdib.marktype`](https://open-vsx.org/extension/imamverdib/marktype), which is
 the registry Antigravity uses, so the usual install works:
 
 ```bash
 "/Applications/Antigravity IDE.app/Contents/Resources/app/bin/antigravity-ide" \
-  --install-extension behbudlu.marktype
+  --install-extension imamverdib.marktype
 ```
 
 Or search **MarkType** in the Extensions view. To install a local build instead,
 point `--install-extension` at `extension/marktype-0.1.0.vsix`; to remove it,
-`… --uninstall-extension behbudlu.marktype`.
+`… --uninstall-extension imamverdib.marktype`.
 
 Publishing a new version needs an Open VSX token in `OVSX_PAT`:
 

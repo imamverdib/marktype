@@ -1,0 +1,8 @@
+.vscode/**
+src/**
+webview/**
+build.mjs
+tsconfig.json
+media/**/*.map
+out/**/*.map
+**/.DS_Store

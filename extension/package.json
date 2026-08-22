@@ -1,0 +1,583 @@
+{
+  "name": "marktype",
+  "displayName": "MarkType — Live Markdown Editor",
+  "description": "Typora-style in-place WYSIWYG Markdown editing, with KaTeX, tables, task lists and syntax-highlighted code fences.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "publisher": "behbudlu",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "wysiwyg",
+    "typora",
+    "live preview",
+    "katex",
+    "editor"
+  ],
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#22262b",
+    "theme": "dark"
+  },
+  "main": "./out/extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": {
+      "supported": "limited",
+      "description": "Images can only be stored next to documents on file systems the IDE can write to."
+    }
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "marktype.editor",
+        "displayName": "MarkType (live Markdown)",
+        "priority": "option",
+        "selector": [
+          {
+            "filenamePattern": "*.md"
+          },
+          {
+            "filenamePattern": "*.markdown"
+          },
+          {
+            "filenamePattern": "*.mdown"
+          },
+          {
+            "filenamePattern": "*.mkd"
+          },
+          {
+            "filenamePattern": "*.mdx"
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "marktype.openEditor",
+        "title": "Open in Live Markdown Editor",
+        "category": "MarkType",
+        "icon": "$(book)"
+      },
+      {
+        "command": "marktype.openSource",
+        "title": "Open Markdown Source",
+        "category": "MarkType",
+        "icon": "$(code)"
+      },
+      {
+        "command": "marktype.save",
+        "title": "Save",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.toggleOutline",
+        "title": "Toggle Outline",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.toggleTypewriterMode",
+        "title": "Toggle Typewriter Mode",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.toggleFocusMode",
+        "title": "Toggle Focus Mode",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "title": "Handled by the MarkType editor",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.bold",
+        "title": "Bold",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.italic",
+        "title": "Italic",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.underline",
+        "title": "Underline",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.strike",
+        "title": "Strikethrough",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.highlight",
+        "title": "Highlight",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.code",
+        "title": "Inline Code",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.link",
+        "title": "Insert Link…",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.paragraph",
+        "title": "Paragraph",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.h1",
+        "title": "Heading 1",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.h2",
+        "title": "Heading 2",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.h3",
+        "title": "Heading 3",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.h4",
+        "title": "Heading 4",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.h5",
+        "title": "Heading 5",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.h6",
+        "title": "Heading 6",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.clear-format",
+        "title": "Clear Formatting",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.bullet-list",
+        "title": "Bullet List",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.ordered-list",
+        "title": "Ordered List",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.task-list",
+        "title": "Task List",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.blockquote",
+        "title": "Blockquote",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.code-block",
+        "title": "Code Block",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.table",
+        "title": "Insert Table",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.math-block",
+        "title": "Insert Math Block",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.image",
+        "title": "Insert Image…",
+        "category": "MarkType"
+      },
+      {
+        "command": "marktype.horizontal-rule",
+        "title": "Horizontal Rule",
+        "category": "MarkType"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+b",
+        "mac": "cmd+b",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+i",
+        "mac": "cmd+i",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+u",
+        "mac": "cmd+u",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+e",
+        "mac": "cmd+e",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+k",
+        "mac": "cmd+k",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+z",
+        "mac": "cmd+z",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+shift+z",
+        "mac": "cmd+shift+z",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+y",
+        "mac": "cmd+y",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+shift+s",
+        "mac": "cmd+shift+s",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+shift+h",
+        "mac": "cmd+shift+h",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+shift+b",
+        "mac": "cmd+shift+b",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+shift+7",
+        "mac": "cmd+shift+7",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+shift+8",
+        "mac": "cmd+shift+8",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+shift+9",
+        "mac": "cmd+shift+9",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+alt+c",
+        "mac": "cmd+alt+c",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+alt+m",
+        "mac": "cmd+alt+m",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+alt+1",
+        "mac": "cmd+alt+1",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+alt+2",
+        "mac": "cmd+alt+2",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+alt+3",
+        "mac": "cmd+alt+3",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+alt+4",
+        "mac": "cmd+alt+4",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+alt+5",
+        "mac": "cmd+alt+5",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.internal.consumeKeybinding",
+        "key": "ctrl+alt+6",
+        "mac": "cmd+alt+6",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.save",
+        "key": "ctrl+s",
+        "mac": "cmd+s",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      },
+      {
+        "command": "marktype.toggleOutline",
+        "key": "ctrl+shift+o",
+        "mac": "cmd+shift+o",
+        "when": "activeCustomEditorId == 'marktype.editor'"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "marktype.openEditor",
+          "group": "navigation@1",
+          "when": "resourceLangId == markdown && activeCustomEditorId != 'marktype.editor'"
+        },
+        {
+          "command": "marktype.openSource",
+          "group": "navigation@1",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "marktype.openEditor",
+          "group": "navigation@10",
+          "when": "resourceExtname =~ /\\.(md|markdown|mdown|mkd|mdx)$/"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "marktype.internal.consumeKeybinding",
+          "when": "false"
+        },
+        {
+          "command": "marktype.bold",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.italic",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.underline",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.strike",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.highlight",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.code",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.link",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.paragraph",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.h1",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.h2",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.h3",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.h4",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.h5",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.h6",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.clear-format",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.bullet-list",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.ordered-list",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.task-list",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.blockquote",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.code-block",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.table",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.math-block",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.image",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.horizontal-rule",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.save",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.toggleOutline",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.openSource",
+          "when": "activeCustomEditorId == 'marktype.editor'"
+        },
+        {
+          "command": "marktype.openEditor",
+          "when": "resourceLangId == markdown"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "MarkType",
+      "properties": {
+        "marktype.fontFamily": {
+          "type": "string",
+          "enum": [
+            "sans",
+            "serif",
+            "mono",
+            "editor"
+          ],
+          "enumDescriptions": [
+            "The IDE's UI font.",
+            "A serif face, for long-form writing.",
+            "A monospaced face.",
+            "Whatever editor.fontFamily is set to."
+          ],
+          "default": "sans",
+          "description": "Typeface used for document text."
+        },
+        "marktype.fontSize": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 40,
+          "markdownDescription": "Document font size in pixels. `0` follows `#editor.fontSize#` plus two."
+        },
+        "marktype.lineWidth": {
+          "type": "number",
+          "default": 46,
+          "minimum": 28,
+          "maximum": 90,
+          "description": "Width of the text column, in rem. Smaller is easier to read."
+        },
+        "marktype.showOutline": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the heading outline beside the document."
+        },
+        "marktype.typewriterMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Keep the caret at a fixed height while typing."
+        },
+        "marktype.focusMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Dim every block except the one holding the caret."
+        },
+        "marktype.spellcheck": {
+          "type": "boolean",
+          "default": true,
+          "description": "Let the system spell checker underline document text."
+        },
+        "marktype.imageFolder": {
+          "type": "string",
+          "default": "assets",
+          "description": "Folder beside the document that pasted and dropped images are copied into."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node ./build.mjs",
+    "watch": "node ./build.mjs --watch",
+    "check": "tsc --noEmit -p .",
+    "package": "node ./build.mjs && vsce package --no-dependencies --allow-missing-repository",
+    "vscode:prepublish": "node ./build.mjs --production"
+  }
+}

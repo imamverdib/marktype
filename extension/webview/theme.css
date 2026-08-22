@@ -1,0 +1,69 @@
+@import "../../src/styles/index.css";
+@import "../../src/styles/editor.css";
+
+/* Tailwind v4 scans from the CSS file's folder; the shared components live
+   outside it, so both trees are declared explicitly. */
+@source "../../src";
+@source "./";
+
+/* ---------------------------------------------------------------------------
+   Inside the IDE the colour scheme belongs to the IDE. Every MarkType token is
+   re-pointed at a VS Code theme variable, with the desktop palette as fallback
+   so the page still renders if a variable is missing.
+--------------------------------------------------------------------------- */
+:root {
+  --mt-canvas: var(--vscode-editor-background, #ffffff);
+  --mt-panel: var(--vscode-sideBar-background, #fbfbfb);
+  --mt-panel-strong: var(--vscode-editorWidget-background, #f2f2f2);
+  --mt-chrome: var(--vscode-editorGroupHeader-tabsBackground, #f6f6f6);
+  --mt-border: var(--vscode-editorWidget-border, var(--vscode-panel-border, #e6e6e6));
+  --mt-border-strong: var(--vscode-input-border, var(--vscode-panel-border, #d9d9d9));
+  --mt-ink: var(--vscode-editor-foreground, var(--vscode-foreground, #2f3337));
+  --mt-ink-strong: var(--vscode-foreground, #1b1f23);
+  --mt-ink-muted: var(--vscode-descriptionForeground, #6a737d);
+  --mt-ink-faint: var(--vscode-disabledForeground, #9aa0a6);
+  --mt-accent: var(--vscode-textLink-foreground, #4183c4);
+  --mt-accent-soft: var(--vscode-list-hoverBackground, rgba(65, 131, 196, 0.12));
+  --mt-code-bg: var(--vscode-textCodeBlock-background, #f7f7f7);
+  --mt-code-ink: var(--vscode-textPreformat-foreground, #c7254e);
+  --mt-selection: var(--vscode-editor-selectionBackground, rgba(65, 131, 196, 0.2));
+  --mt-danger: var(--vscode-errorForeground, #d1453b);
+  --mt-success: var(--vscode-charts-green, #2f9e44);
+  --mt-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
+
+  --mt-font-body: var(--vscode-font-family);
+  --mt-font-mono: var(--vscode-editor-font-family, ui-monospace, monospace);
+  --mt-font-family: var(--mt-font-body);
+}
+
+/* The dark palette differs only where a VS Code variable is missing. */
+body.vscode-dark,
+body.vscode-high-contrast {
+  --mt-marker: rgba(255, 214, 102, 0.32);
+  --mt-syntax-comment: #7c858d;
+  --mt-syntax-keyword: #e08aa8;
+  --mt-syntax-string: #a3d3a0;
+  --mt-syntax-number: #d5b678;
+  --mt-syntax-function: #9db9e8;
+  --mt-syntax-type: #7fc8d8;
+  --mt-syntax-tag: #8fce9c;
+  --mt-syntax-attr: #c9a9e0;
+}
+
+/* VS Code gives webview bodies padding and its own font size; the editor owns
+   its own metrics. */
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+#root {
+  height: 100vh;
+}
+
+/* Keep the IDE's focus ring instead of the desktop app's. */
+:focus-visible {
+  outline-color: var(--vscode-focusBorder, var(--mt-accent));
+}

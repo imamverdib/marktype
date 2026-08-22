@@ -1,0 +1,407 @@
+/* ---------------------------------------------------------------------------
+   Editor typography. Deliberately close to Typora: one comfortable measure,
+   quiet headings, and syntax markers that only appear on the active block.
+--------------------------------------------------------------------------- */
+
+.mt-surface {
+  font-family: var(--mt-font-family);
+  font-size: var(--mt-font-size);
+  line-height: var(--mt-line-height);
+  color: var(--mt-ink);
+}
+
+.mt-surface .ProseMirror {
+  min-height: calc(100vh - 12rem);
+  padding: 0 0 45vh;
+  outline: none;
+  user-select: text;
+  cursor: text;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  -webkit-user-select: text;
+  tab-size: 4;
+}
+
+/* Block rhythm ------------------------------------------------------------ */
+.mt-surface .ProseMirror > * + * {
+  margin-top: 0.9em;
+}
+
+.mt-surface p {
+  margin: 0;
+}
+
+.mt-surface h1,
+.mt-surface h2,
+.mt-surface h3,
+.mt-surface h4,
+.mt-surface h5,
+.mt-surface h6 {
+  position: relative;
+  margin: 1.6em 0 0;
+  font-weight: 650;
+  line-height: 1.32;
+  color: var(--mt-ink-strong);
+  letter-spacing: -0.011em;
+}
+
+.mt-surface .ProseMirror > h1:first-child,
+.mt-surface .ProseMirror > h2:first-child {
+  margin-top: 0.2em;
+}
+
+.mt-surface h1 {
+  font-size: 1.9em;
+  padding-bottom: 0.32em;
+  border-bottom: 1px solid var(--mt-border);
+}
+.mt-surface h2 {
+  font-size: 1.5em;
+  padding-bottom: 0.28em;
+  border-bottom: 1px solid var(--mt-border);
+}
+.mt-surface h3 { font-size: 1.26em; }
+.mt-surface h4 { font-size: 1.1em; }
+.mt-surface h5 { font-size: 1em; }
+.mt-surface h6 {
+  font-size: 0.92em;
+  color: var(--mt-ink-muted);
+}
+
+/* Inline ------------------------------------------------------------------ */
+.mt-surface strong { font-weight: 660; color: var(--mt-ink-strong); }
+.mt-surface em { font-style: italic; }
+.mt-surface s { color: var(--mt-ink-muted); }
+.mt-surface u { text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+.mt-surface mark {
+  background: var(--mt-marker);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 0.12em;
+}
+
+.mt-surface a {
+  color: var(--mt-accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--mt-accent) 35%, transparent);
+  cursor: pointer;
+}
+.mt-surface a:hover {
+  border-bottom-color: var(--mt-accent);
+}
+
+.mt-surface code {
+  font-family: var(--mt-font-mono);
+  font-size: 0.88em;
+  background: var(--mt-code-bg);
+  color: var(--mt-code-ink);
+  padding: 0.16em 0.36em;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--mt-border) 70%, transparent);
+}
+
+/* Quotes ----------------------------------------------------------------- */
+.mt-surface blockquote {
+  margin: 1.1em 0 0;
+  padding: 0.05em 0 0.05em 1.1em;
+  border-left: 3px solid var(--mt-border-strong);
+  color: var(--mt-ink-muted);
+}
+.mt-surface blockquote > * + * {
+  margin-top: 0.7em;
+}
+
+/* Lists ------------------------------------------------------------------ */
+.mt-surface ul,
+.mt-surface ol {
+  margin: 0;
+  padding-left: 1.55em;
+}
+.mt-surface ul { list-style: disc; }
+.mt-surface ul ul { list-style: circle; }
+.mt-surface ul ul ul { list-style: square; }
+.mt-surface ol { list-style: decimal; }
+.mt-surface li { margin: 0.22em 0; }
+.mt-surface li > p { margin: 0; }
+.mt-surface li::marker { color: var(--mt-ink-faint); }
+
+/* Task lists ------------------------------------------------------------- */
+.mt-surface ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0.1em;
+}
+.mt-surface ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55em;
+}
+.mt-surface ul[data-type="taskList"] li > label {
+  flex: 0 0 auto;
+  margin-top: calc((var(--mt-line-height) * 1em - 1.05em) / 2);
+  user-select: none;
+}
+.mt-surface ul[data-type="taskList"] li > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.mt-surface ul[data-type="taskList"] input[type="checkbox"] {
+  appearance: none;
+  width: 1.05em;
+  height: 1.05em;
+  border: 1.5px solid var(--mt-border-strong);
+  border-radius: 4px;
+  background: var(--mt-canvas);
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.mt-surface ul[data-type="taskList"] input[type="checkbox"]:checked {
+  background: var(--mt-accent);
+  border-color: var(--mt-accent);
+}
+.mt-surface ul[data-type="taskList"] input[type="checkbox"]:checked::after {
+  content: "";
+  width: 0.55em;
+  height: 0.3em;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: translateY(-0.06em) rotate(-45deg);
+}
+.mt-surface ul[data-type="taskList"] li[data-checked="true"] > div {
+  color: var(--mt-ink-faint);
+  text-decoration: line-through;
+}
+
+/* Rules ------------------------------------------------------------------ */
+.mt-surface hr {
+  margin: 1.9em 0 0;
+  border: none;
+  height: 1px;
+  background: var(--mt-border);
+}
+.mt-surface hr.ProseMirror-selectednode {
+  background: var(--mt-accent);
+}
+
+/* Code blocks ------------------------------------------------------------ */
+.mt-surface .mt-codeblock {
+  position: relative;
+  margin: 1.15em 0 0;
+  border: 1px solid var(--mt-border);
+  border-radius: 8px;
+  background: var(--mt-code-bg);
+  overflow: hidden;
+}
+.mt-surface .mt-codeblock pre {
+  margin: 0;
+  padding: 0.85em 1em 0.95em;
+  overflow-x: auto;
+  background: transparent;
+}
+.mt-surface .mt-codeblock code {
+  display: block;
+  font-family: var(--mt-font-mono);
+  font-size: 0.855em;
+  line-height: 1.62;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--mt-ink);
+  white-space: pre;
+}
+.mt-surface .mt-codeblock__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.3rem 0.4rem 0.3rem 0.7rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--mt-border) 75%, transparent);
+  background: color-mix(in srgb, var(--mt-panel-strong) 60%, transparent);
+  font-family: var(--mt-font-body);
+  font-size: 11px;
+  color: var(--mt-ink-muted);
+}
+
+/* highlight.js tokens, mapped onto the palette. */
+.mt-surface .hljs-comment,
+.mt-surface .hljs-quote { color: var(--mt-syntax-comment); font-style: italic; }
+.mt-surface .hljs-keyword,
+.mt-surface .hljs-selector-tag,
+.mt-surface .hljs-literal,
+.mt-surface .hljs-doctag { color: var(--mt-syntax-keyword); }
+.mt-surface .hljs-string,
+.mt-surface .hljs-regexp,
+.mt-surface .hljs-addition { color: var(--mt-syntax-string); }
+.mt-surface .hljs-number,
+.mt-surface .hljs-symbol,
+.mt-surface .hljs-bullet { color: var(--mt-syntax-number); }
+.mt-surface .hljs-title,
+.mt-surface .hljs-title.function_,
+.mt-surface .hljs-section { color: var(--mt-syntax-function); font-weight: 600; }
+.mt-surface .hljs-type,
+.mt-surface .hljs-class .hljs-title,
+.mt-surface .hljs-built_in,
+.mt-surface .hljs-params { color: var(--mt-syntax-type); }
+.mt-surface .hljs-name,
+.mt-surface .hljs-tag { color: var(--mt-syntax-tag); }
+.mt-surface .hljs-attr,
+.mt-surface .hljs-attribute,
+.mt-surface .hljs-variable,
+.mt-surface .hljs-template-variable { color: var(--mt-syntax-attr); }
+.mt-surface .hljs-emphasis { font-style: italic; }
+.mt-surface .hljs-strong { font-weight: 700; }
+.mt-surface .hljs-deletion { color: var(--mt-danger); }
+
+/* Tables ----------------------------------------------------------------- */
+.mt-surface .tableWrapper {
+  margin: 1.2em 0 0;
+  overflow-x: auto;
+}
+.mt-surface table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  font-size: 0.95em;
+  overflow: hidden;
+}
+.mt-surface th,
+.mt-surface td {
+  position: relative;
+  border: 1px solid var(--mt-border);
+  padding: 0.42em 0.62em;
+  vertical-align: top;
+  min-width: 3em;
+  box-sizing: border-box;
+}
+.mt-surface th {
+  background: var(--mt-panel-strong);
+  font-weight: 620;
+  color: var(--mt-ink-strong);
+  text-align: left;
+}
+.mt-surface th > p,
+.mt-surface td > p {
+  margin: 0;
+}
+.mt-surface .selectedCell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--mt-accent-soft);
+  pointer-events: none;
+}
+.mt-surface .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--mt-accent);
+  pointer-events: none;
+  z-index: 20;
+}
+.mt-surface.resize-cursor {
+  cursor: col-resize;
+}
+
+/* Images ----------------------------------------------------------------- */
+.mt-surface img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.2em auto 0;
+  border-radius: 6px;
+}
+.mt-surface img.ProseMirror-selectednode {
+  outline: 2px solid var(--mt-accent);
+  outline-offset: 2px;
+}
+
+/* Math ------------------------------------------------------------------- */
+.mt-surface .tiptap-mathematics-render {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0 0.12em;
+}
+.mt-surface .tiptap-mathematics-render:hover {
+  background: var(--mt-accent-soft);
+}
+.mt-surface [data-type="block-math"] {
+  margin: 1.2em 0 0;
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35em 0;
+}
+.mt-surface .tiptap-mathematics-render--editable:empty::before,
+.mt-surface [data-type="block-math"]:empty::before {
+  content: "Empty formula";
+  color: var(--mt-ink-faint);
+  font-style: italic;
+}
+.mt-surface .katex { font-size: 1.05em; }
+.mt-surface [data-type="block-math"].ProseMirror-selectednode,
+.mt-surface [data-type="inline-math"].ProseMirror-selectednode {
+  background: var(--mt-accent-soft);
+  border-radius: 4px;
+}
+
+/* Placeholder ------------------------------------------------------------ */
+.mt-surface .is-editor-empty:first-child::before,
+.mt-surface p.is-empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: var(--mt-ink-faint);
+}
+
+/* Gap cursor ------------------------------------------------------------- */
+.mt-surface .ProseMirror-gapcursor::after {
+  border-top-color: var(--mt-ink);
+}
+
+/* ---------------------------------------------------------------------------
+   Typora-style source markers: only the block under the caret shows them.
+--------------------------------------------------------------------------- */
+.mt-surface [data-mt-active="true"]::before {
+  position: absolute;
+  right: 100%;
+  padding-right: 0.4em;
+  color: var(--mt-ink-faint);
+  font-family: var(--mt-font-mono);
+  font-weight: 400;
+  font-size: 0.78em;
+  line-height: inherit;
+  opacity: 0.75;
+  pointer-events: none;
+  user-select: none;
+}
+.mt-surface h1[data-mt-active="true"]::before { content: "#"; }
+.mt-surface h2[data-mt-active="true"]::before { content: "##"; }
+.mt-surface h3[data-mt-active="true"]::before { content: "###"; }
+.mt-surface h4[data-mt-active="true"]::before { content: "####"; }
+.mt-surface h5[data-mt-active="true"]::before { content: "#####"; }
+.mt-surface h6[data-mt-active="true"]::before { content: "######"; }
+.mt-surface blockquote[data-mt-active="true"] {
+  border-left-color: var(--mt-accent);
+}
+
+/* Editing modes ---------------------------------------------------------- */
+.mt-surface[data-focus-mode="true"] .ProseMirror > *:not([data-mt-active="true"]) {
+  opacity: 0.34;
+  transition: opacity 160ms ease;
+}
+.mt-surface[data-focus-mode="true"] .ProseMirror > [data-mt-active="true"] {
+  opacity: 1;
+}
+
+/* Source (raw markdown) mode -------------------------------------------- */
+.mt-source {
+  font-family: var(--mt-font-mono);
+  font-size: calc(var(--mt-font-size) * 0.9);
+  line-height: 1.65;
+  tab-size: 2;
+}

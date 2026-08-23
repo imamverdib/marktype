@@ -12,6 +12,7 @@ import { ActiveBlock } from "./ActiveBlock";
 import { CodeBlockView } from "./CodeBlockView";
 import { MarkdownImage } from "./MarkdownImage";
 import { Shortcuts, type ShortcutHandlers } from "./Shortcuts";
+import { ListTyping } from "./listTyping";
 import { TyporaBlockMath, TyporaInlineMath } from "./math";
 import { lowlight } from "./lowlight";
 
@@ -68,5 +69,6 @@ export function buildExtensions(shortcuts: ShortcutHandlers = {}): Extensions {
     CharacterCount.configure({ limit: null }),
     ActiveBlock,
     Shortcuts.configure(shortcuts),
+    ListTyping,
   ];
 }

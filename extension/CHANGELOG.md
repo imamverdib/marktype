@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.1
+
+Fixes found by driving the editor in a real browser.
+
+- Typing `$5 and $10` no longer swallows the space between the two prices. The
+  input rule was looser than the Markdown parser, so a price pair became a
+  formula while typing but not when the file was read back.
+- `- [ ] ` now produces a task list while typing, matching how the same text is
+  read from a file. Upstream only converts a bare `[ ] ` in a paragraph.
+- Enter on an empty list item leaves the list instead of adding another empty
+  one.
+- Opening a document no longer marks the tab dirty, and the file's final newline
+  is preserved, so open-then-save leaves a well-formed file byte-identical.
+
 ## 0.1.0
 
 First release.

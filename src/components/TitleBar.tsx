@@ -29,6 +29,8 @@ import { baseName, cn, formatShortcut } from "@/lib/utils";
 import type { Preferences } from "@/lib/settings";
 
 type TitleBarProps = {
+  /** `desktop` leaves room for the traffic lights and offers Finder actions. */
+  variant?: "desktop" | "web";
   name: string;
   dirty: boolean;
   saving: boolean;
@@ -59,6 +61,7 @@ export type TitleBarAction =
  * and the left inset leaves room for the traffic lights.
  */
 export function TitleBar({
+  variant = "desktop",
   name,
   dirty,
   saving,
@@ -68,13 +71,15 @@ export function TitleBar({
   onOpenRecent,
 }: TitleBarProps) {
   const dark = preferences.theme === "dark";
+  const desktop = variant === "desktop";
 
   return (
     <header
       data-tauri-drag-region
       className={cn(
         "drag-region relative flex h-11 shrink-0 items-center gap-1 border-b border-edge",
-        "bg-chrome pr-2 pl-[84px]",
+        "bg-chrome pr-2",
+        desktop ? "pl-[84px]" : "pl-2",
       )}
     >
       <Tooltip label="Toggle outline" shortcut={formatShortcut("Mod+\\")}>
@@ -183,9 +188,11 @@ export function TitleBar({
           </DropdownMenuCheckboxItem>
 
           <DropdownMenuSeparator />
-          <DropdownMenuItem onSelect={() => onAction("reveal")}>
-            <FolderOpen className="size-3.5" /> Reveal in Finder
-          </DropdownMenuItem>
+          {desktop && (
+            <DropdownMenuItem onSelect={() => onAction("reveal")}>
+              <FolderOpen className="size-3.5" /> Reveal in Finder
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem onSelect={() => onAction("preferences")}>
             <Settings2 className="size-3.5" /> Preferences…
           </DropdownMenuItem>

@@ -1,0 +1,9 @@
+@import "../src/styles/index.css";
+@import "../src/styles/editor.css";
+
+/* Tailwind v4 detects sources relative to this file's project root, which is
+   `web/`. The components live one level up, so the shared tree is declared
+   explicitly — without this, every utility class used by the shared shell
+   components is missing from the bundle. */
+@source "../src";
+@source "./";

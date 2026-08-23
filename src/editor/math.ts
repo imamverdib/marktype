@@ -14,7 +14,10 @@ const looksLikeCurrency = (latex: string) => /^[\d.,\s]+$/.test(latex);
  * as maths when it hugs its delimiters and does not run into a digit, which is
  * how every Markdown-with-maths implementation disambiguates prices.
  */
-const INLINE_MATH = /^\$([^\s$][^$\n]*[^\s$]|[^\s$])\$(?![\d$])/;
+export const INLINE_MATH = /^\$([^\s$][^$\n]*[^\s$]|[^\s$])\$(?![\d$])/;
+
+/** The same shape, anchored to what has just been typed. */
+export const INLINE_MATH_TYPED = /(?<!\$)\$([^\s$][^$\n]*[^\s$]|[^\s$])\$$/;
 
 /**
  * The shipped input rules use `$$…$$` for inline and `$$$…$$$` for block maths.
@@ -39,7 +42,7 @@ export const TyporaInlineMath = InlineMath.extend({
   addInputRules() {
     return [
       new InputRule({
-        find: /(?<!\$)\$([^\s$][^$\n]*?)\$$/,
+        find: INLINE_MATH_TYPED,
         handler: ({ state, range, match }) => {
           const latex = match[1];
           if (!latex || looksLikeCurrency(latex)) return null;

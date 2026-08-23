@@ -1,11 +1,12 @@
 /**
- * The editor core runs in two shells: the Tauri desktop window and the
- * Antigravity/VS Code webview. Everything they disagree about — how a link
- * opens, where a pasted image goes, how a local path becomes a loadable URL —
- * lives behind this adapter, so the editor itself has no host imports.
+ * The editor core runs in three shells: the Tauri desktop window, the
+ * Antigravity/VS Code webview, and a plain browser page. Everything they
+ * disagree about — how a link opens, where a pasted image goes, how a local
+ * path becomes a loadable URL — lives behind this adapter, so the editor itself
+ * has no host imports.
  */
 export type HostAdapter = {
-  readonly kind: "desktop" | "editor-extension";
+  readonly kind: "desktop" | "editor-extension" | "browser";
 
   /** Opens an http(s) address outside the editor. */
   openExternal(href: string): void;

@@ -8,6 +8,7 @@
 import { MarkdownManager } from "@tiptap/markdown";
 
 import { buildExtensions } from "../src/editor/extensions";
+import { INLINE_MATH, INLINE_MATH_TYPED } from "../src/editor/math";
 import { tidyMarkdown } from "../src/lib/markdown";
 import { WELCOME_DOCUMENT } from "../src/lib/welcome";
 
@@ -107,6 +108,32 @@ for (const testCase of EXACT) {
   }
 }
 
+// The typing rule and the parser must agree on what counts as maths, or a
+// formula behaves differently depending on whether it was typed or loaded.
+const MATH_CASES: { text: string; isMaths: boolean; why: string }[] = [
+  { text: "$E = mc^2$", isMaths: true, why: "a plain formula" },
+  { text: "$x$", isMaths: true, why: "a single symbol" },
+  { text: "$a^2+b^2=c^2$", isMaths: true, why: "no spaces" },
+  { text: "$5 and $", isMaths: false, why: "trailing space: two prices, not maths" },
+  { text: "$ x $", isMaths: false, why: "padded delimiters" },
+  { text: "$100$", isMaths: false, why: "digits only: a price range" },
+];
+
+for (const testCase of MATH_CASES) {
+  const typed = INLINE_MATH_TYPED.exec(testCase.text);
+  const parsed = INLINE_MATH.exec(testCase.text);
+  // A digits-only body is rejected by the currency guard in both paths.
+  const digitsOnly = /^\$[\d.,\s]+\$$/.test(testCase.text);
+  const typedMaths = Boolean(typed) && !digitsOnly;
+  const parsedMaths = Boolean(parsed) && !digitsOnly;
+  const ok = typedMaths === testCase.isMaths && parsedMaths === testCase.isMaths;
+  if (!ok) failed += 1;
+  console.log(`${ok ? "ok  " : "FAIL"}  maths: ${testCase.why}`);
+  if (!ok) {
+    console.log(`  ${JSON.stringify(testCase.text)} typed=${typedMaths} parsed=${parsedMaths} expected=${testCase.isMaths}`);
+  }
+}
+
 // A second pass must be a fixed point: saving twice may not keep changing text.
 const once = roundTrip(WELCOME_DOCUMENT);
 const twice = roundTrip(once);
@@ -114,6 +141,6 @@ const stable = normalize(once) === normalize(twice);
 console.log(`${stable ? "ok  " : "FAIL"}  serialization is stable on re-save`);
 if (!stable) failed += 1;
 
-const total = CASES.length + EXACT.length + 1;
+const total = CASES.length + EXACT.length + MATH_CASES.length + 1;
 console.log(`\n${total - failed}/${total} checks passed`);
 process.exit(failed === 0 ? 0 : 1);

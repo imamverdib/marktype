@@ -2,8 +2,17 @@
   "name": "marktype",
   "displayName": "MarkType — Live Markdown Editor",
   "description": "Typora-style in-place WYSIWYG Markdown editing, with KaTeX, tables, task lists and syntax-highlighted code fences.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imamverdib/marktype.git",
+    "directory": "extension"
+  },
+  "bugs": {
+    "url": "https://github.com/imamverdib/marktype/issues"
+  },
+  "homepage": "https://github.com/imamverdib/marktype#readme",
   "publisher": "imamverdib",
   "engines": {
     "vscode": "^1.100.0"

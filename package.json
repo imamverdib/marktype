@@ -16,8 +16,8 @@
     "check:extension": "tsc --noEmit -p extension",
     "ext:build": "node extension/build.mjs",
     "ext:watch": "node extension/build.mjs --watch",
-    "ext:package": "cd extension && node build.mjs --production && vsce package --no-dependencies --allow-missing-repository",
-    "ext:publish": "cd extension && node build.mjs --production && vsce package --no-dependencies --allow-missing-repository && ovsx publish marktype-*.vsix",
+    "ext:package": "cd extension && node build.mjs --production && vsce package --no-dependencies",
+    "ext:publish": "cd extension && node build.mjs --production && vsce package --no-dependencies && ovsx publish marktype-*.vsix",
     "web:dev": "vite --config web/vite.config.ts",
     "web:build": "tsc --noEmit && vite build --config web/vite.config.ts"
   },

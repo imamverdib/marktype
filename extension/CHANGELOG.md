@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Declare the source repository, so the listing links back to the code.
+
 ## 0.1.1
 
 Fixes found by driving the editor in a real browser.

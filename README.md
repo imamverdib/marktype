@@ -3,11 +3,13 @@
 A fast, minimalist Markdown editor, inspired by Typora. What you type becomes
 formatted text **in place** — there is no split preview to keep in sync.
 
-It ships as two things from one editor core:
+It ships as three things from one editor core:
 
-- **`marktype.app`** — a native macOS app built with **Tauri v2** (Rust).
-- **`extension/`** — a **live Markdown editor for Antigravity IDE** and any
-  VS Code 1.100+ build, packaged as a `.vsix`.
+| | |
+| --- | --- |
+| **macOS app** | a native window built with **Tauri v2** (Rust) — [download](https://github.com/imamverdib/marktype/releases/latest) |
+| **IDE extension** | a live Markdown editor for **Antigravity IDE** and any VS Code 1.100+ build — [`imamverdib.marktype`](https://open-vsx.org/extension/imamverdib/marktype) |
+| **Browser build** | try it without installing anything — [Hugging Face Space](https://huggingface.co/spaces/imamverdibehbudlu/marktype) |
 
 The editor itself is **React + Vite + TypeScript**, **Tailwind CSS v4** and
 **TipTap v3** with the official `@tiptap/markdown` round-trip. Everything the

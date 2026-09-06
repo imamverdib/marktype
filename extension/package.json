@@ -2,7 +2,7 @@
   "name": "marktype",
   "displayName": "MarkType — Live Markdown Editor",
   "description": "Typora-style in-place WYSIWYG Markdown editing, with KaTeX, tables, task lists and syntax-highlighted code fences.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "repository": {
     "type": "git",

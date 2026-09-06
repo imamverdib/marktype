@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Remove outline panel and toggle command for a cleaner, distraction-free editing experience.
+
 ## 0.1.2
 
 - Declare the source repository, so the listing links back to the code.

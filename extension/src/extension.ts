@@ -64,7 +64,6 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  register("marktype.toggleOutline", () => toggleSetting("showOutline"));
   register("marktype.toggleTypewriterMode", () => toggleSetting("typewriterMode"));
   register("marktype.toggleFocusMode", () => toggleSetting("focusMode"));
 

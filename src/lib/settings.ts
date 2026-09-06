@@ -9,7 +9,6 @@ export type Preferences = {
   fontSize: number;
   measure: number;
   autosave: boolean;
-  showOutline: boolean;
   typewriter: boolean;
   focusMode: boolean;
   spellcheck: boolean;
@@ -21,7 +20,6 @@ export const DEFAULT_PREFERENCES: Preferences = {
   fontSize: 16,
   measure: 46,
   autosave: false,
-  showOutline: true,
   typewriter: false,
   focusMode: false,
   spellcheck: true,

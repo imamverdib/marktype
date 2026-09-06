@@ -10,7 +10,6 @@ import { EditorPane } from "./components/EditorPane";
 import { LinkDialog } from "./components/LinkDialog";
 import { MathDialog } from "./components/MathDialog";
 import { Notice, type NoticeState } from "./components/Notice";
-import { OutlinePanel } from "./components/OutlinePanel";
 import { PreferencesSheet } from "./components/PreferencesSheet";
 import { ShortcutsSheet } from "./components/ShortcutsSheet";
 import { SourceEditor } from "./components/SourceEditor";
@@ -36,7 +35,6 @@ import {
   revealInFinder,
 } from "./lib/files";
 import { onMenuAction, type MenuAction } from "./lib/menu";
-import { activeOutlineIndex, extractOutline, type OutlineItem } from "./lib/outline";
 import { computeStats } from "./lib/stats";
 import { WELCOME_DOCUMENT } from "./lib/welcome";
 
@@ -210,8 +208,6 @@ export default function App() {
           );
           return;
         }
-        case "toggle-outline":
-          return toggle("showOutline");
         case "toggle-theme":
           return set("theme", preferences.theme === "dark" ? "light" : "dark");
         case "toggle-typewriter":
@@ -288,14 +284,6 @@ export default function App() {
     // Only the path opener matters here, and it is stable across renders.
   }, [session.openPath]);
 
-  const outline = useEditorState({
-    editor,
-    selector: ({ editor: instance }) => ({
-      items: extractOutline(instance),
-      caret: instance.state.selection.head,
-    }),
-  });
-
   const documentText = useEditorState({
     editor,
     selector: ({ editor: instance }) => instance.getText({ blockSeparator: "\n" }),
@@ -304,18 +292,6 @@ export default function App() {
   const stats = useMemo(
     () => computeStats(sourceMode ? sourceText : documentText),
     [documentText, sourceMode, sourceText],
-  );
-
-  const goToHeading = useCallback(
-    (item: OutlineItem) => {
-      editor
-        .chain()
-        .focus()
-        .setTextSelection(item.pos + 1)
-        .scrollIntoView()
-        .run();
-    },
-    [editor],
   );
 
   return (
@@ -333,14 +309,6 @@ export default function App() {
         />
 
         <div className="flex min-h-0 flex-1">
-          {preferences.showOutline && (
-            <OutlinePanel
-              items={outline.items}
-              activeIndex={activeOutlineIndex(outline.items, outline.caret)}
-              onSelect={goToHeading}
-            />
-          )}
-
           {sourceMode ? (
             <SourceEditor
               value={sourceText}

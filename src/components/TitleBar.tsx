@@ -7,7 +7,6 @@ import {
   Keyboard,
   MoreHorizontal,
   Moon,
-  PanelLeft,
   Save,
   Settings2,
   Sun,
@@ -47,7 +46,6 @@ export type TitleBarAction =
   | "save-as"
   | "reveal"
   | "copy-markdown"
-  | "toggle-outline"
   | "toggle-theme"
   | "toggle-source"
   | "toggle-typewriter"
@@ -82,17 +80,6 @@ export function TitleBar({
         desktop ? "pl-[84px]" : "pl-2",
       )}
     >
-      <Tooltip label="Toggle outline" shortcut={formatShortcut("Mod+\\")}>
-        <Button
-          size="icon"
-          active={preferences.showOutline}
-          onClick={() => onAction("toggle-outline")}
-          aria-label="Toggle outline"
-        >
-          <PanelLeft className="size-4" />
-        </Button>
-      </Tooltip>
-
       <div
         data-tauri-drag-region
         className="drag-region flex min-w-0 flex-1 items-center justify-center gap-1.5"

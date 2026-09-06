@@ -42,7 +42,6 @@ so there is a single copy of the editor.
   writing through `@tauri-apps/plugin-fs`.
 - Optional **auto-save**, a dirty indicator in the title bar and a save state in
   the status bar.
-- **Outline** sidebar built from H1–H6, tracking the caret.
 - Word count, character count and reading time in the status bar.
 - Light (Typora GitHub) and dark (Typora Night) themes.
 - Full native menu bar, `.md` file association, "Open With" and
@@ -63,7 +62,6 @@ so there is a single copy of the editor.
 | ⌘K | link |
 | ⌘0 / ⌘1…⌘6 | paragraph, heading 1–6 |
 | ⌘⌥T / ⌘⌥C / ⌘⌥M / ⌘⌥I | table, code block, math block, image |
-| ⌘\ | toggle outline |
 | ⌘/ | source mode |
 | ⌘⇧D | toggle dark mode |
 | ⌘⌥P / ⌘⌥F / ⌘⌥S | typewriter, focus mode, auto-save |
@@ -158,11 +156,11 @@ src/                      the shared editor core (used by both hosts)
     ActiveBlock.ts         marks the block under the caret (margin markers, focus mode)
     CodeBlockView.tsx     code fence chrome: language picker + copy
     lowlight.ts           the highlighter's grammar set
-  components/             title bar, outline, status bar, bubbles, dialogs
+  components/             title bar, status bar, bubbles, dialogs
   hooks/
     useDocumentSession.ts path, dirty state, save, auto-save, close guard
     useFileDrop.ts        native drag & drop (real filesystem paths)
-  lib/                    files, assets, stats, outline, settings, menu bridge
+  lib/                    files, assets, stats, settings, menu bridge
 src-tauri/                the desktop shell
   src/lib.rs              plugins, commands, "open with" hand-off
   src/menu.rs             the native menu bar

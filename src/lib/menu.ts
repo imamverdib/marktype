@@ -33,7 +33,6 @@ export const MENU_ACTIONS = [
   "math-block",
   "image",
   "horizontal-rule",
-  "toggle-outline",
   "toggle-theme",
   "toggle-typewriter",
   "toggle-focus-mode",

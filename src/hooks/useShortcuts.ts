@@ -16,7 +16,6 @@ const BINDINGS: { key: string; shift?: boolean; alt?: boolean; action: MenuActio
   { key: "s", action: "save" },
   { key: "s", shift: true, action: "save-as" },
   { key: "r", alt: true, action: "reveal" },
-  { key: "\\", action: "toggle-outline" },
   { key: "d", shift: true, action: "toggle-theme" },
   { key: "/", action: "toggle-source" },
   { key: ",", action: "preferences" },

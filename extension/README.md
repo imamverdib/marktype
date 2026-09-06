@@ -47,10 +47,9 @@ Prefer it always? Add this to your settings:
 | an image you drop, paste or pick | an `![…]` link into `assets/` beside the document |
 | `---` | horizontal rule |
 
-Alongside that: a heading outline beside the document, a word count in the IDE
-status bar, ⌘F find inside the editor, typewriter and focus modes, and full
-round-trip fidelity — the file you save is the Markdown you would have written
-by hand.
+Alongside that: a word count in the IDE status bar, ⌘F find inside the editor,
+typewriter and focus modes, and full round-trip fidelity — the file you save is
+the Markdown you would have written by hand.
 
 ## Keyboard
 
@@ -65,7 +64,6 @@ The document has focus, so the editor handles formatting keys directly:
 | ⌘⇧7 / ⌘⇧8 / ⌘⇧9 | ordered, bullet, task list |
 | ⌘⇧B / ⌘⌥C | blockquote, code block |
 | ⌘⌥M / ⌘⌥I | math block, image |
-| ⌘⇧O | toggle outline |
 | ⌘S / ⌘Z | save and undo, handled the usual way |
 
 While a MarkType tab is focused, those keys are claimed for the document, so the
@@ -80,7 +78,6 @@ rebind any of them.
 | `marktype.fontFamily` | `sans` | `sans`, `serif`, `mono` or `editor` |
 | `marktype.fontSize` | `0` | pixels; `0` follows `editor.fontSize` + 2 |
 | `marktype.lineWidth` | `46` | text column width, in rem |
-| `marktype.showOutline` | `true` | heading outline beside the document |
 | `marktype.typewriterMode` | `false` | hold the caret at a fixed height |
 | `marktype.focusMode` | `false` | dim every block but the current one |
 | `marktype.spellcheck` | `true` | system spell checker on document text |

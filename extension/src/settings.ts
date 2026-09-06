@@ -15,7 +15,6 @@ export function readSettings(resource?: vscode.Uri): WebviewSettings {
     editorFontSize: editor.get<number>("fontSize", 14),
     editorFontFamily: editor.get<string>("fontFamily", "monospace"),
     lineWidth: config.get<number>("lineWidth", 46),
-    showOutline: config.get<boolean>("showOutline", true),
     typewriter: config.get<boolean>("typewriterMode", false),
     focusMode: config.get<boolean>("focusMode", false),
     spellcheck: config.get<boolean>("spellcheck", true),
@@ -32,7 +31,7 @@ export function imageFolder(resource?: vscode.Uri): string {
 }
 
 /** Persists a toggled view option so it survives reopening the editor. */
-export async function toggleSetting(key: "showOutline" | "typewriterMode" | "focusMode") {
+export async function toggleSetting(key: "typewriterMode" | "focusMode") {
   const config = vscode.workspace.getConfiguration(SECTION);
   const current = config.get<boolean>(key, false);
   await config.update(key, !current, vscode.ConfigurationTarget.Global);

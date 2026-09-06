@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useEditor, useEditorState } from "@tiptap/react";
+import { useEditor } from "@tiptap/react";
 
 import { EditorPane } from "@/components/EditorPane";
 import { LinkDialog } from "@/components/LinkDialog";
 import { MathDialog } from "@/components/MathDialog";
-import { OutlinePanel } from "@/components/OutlinePanel";
 import { TooltipProvider } from "@/components/ui/Tooltip";
 import { runEditorAction } from "@/editor/actions";
 import { buildExtensions } from "@/editor/extensions";
@@ -13,7 +12,6 @@ import { HostProvider } from "@/host/context";
 import type { HostAdapter } from "@/host/types";
 import { setLocalAssetResolver } from "@/lib/assets";
 import { documentMarkdown } from "@/lib/markdown";
-import { activeOutlineIndex, extractOutline, type OutlineItem } from "@/lib/outline";
 import type { Preferences } from "@/lib/settings";
 import { computeStats } from "@/lib/stats";
 
@@ -29,7 +27,6 @@ const FALLBACK_SETTINGS: WebviewSettings = {
   editorFontSize: 14,
   editorFontFamily: "monospace",
   lineWidth: 46,
-  showOutline: true,
   typewriter: false,
   focusMode: false,
   spellcheck: true,
@@ -69,7 +66,6 @@ function toPreferences(settings: WebviewSettings): Preferences {
     fontSize: settings.fontSize || settings.editorFontSize + 2,
     measure: settings.lineWidth,
     autosave: false,
-    showOutline: settings.showOutline,
     typewriter: settings.typewriter,
     focusMode: settings.focusMode,
     spellcheck: settings.spellcheck,
@@ -232,39 +228,12 @@ export function Shell() {
     });
   }, [editor, settings]);
 
-  const outline = useEditorState({
-    editor,
-    selector: ({ editor: instance }) => ({
-      items: extractOutline(instance),
-      caret: instance.state.selection.head,
-    }),
-  });
-
   const preferences = useMemo(() => toPreferences(settings), [settings]);
-
-  const goToHeading = useCallback(
-    (item: OutlineItem) => {
-      editor
-        .chain()
-        .focus()
-        .setTextSelection(item.pos + 1)
-        .scrollIntoView()
-        .run();
-    },
-    [editor],
-  );
 
   return (
     <HostProvider adapter={host}>
       <TooltipProvider>
         <div className="flex h-full bg-canvas text-ink">
-          {preferences.showOutline && (
-            <OutlinePanel
-              items={outline.items}
-              activeIndex={activeOutlineIndex(outline.items, outline.caret)}
-              onSelect={goToHeading}
-            />
-          )}
           <EditorPane
             editor={editor}
             preferences={preferences}

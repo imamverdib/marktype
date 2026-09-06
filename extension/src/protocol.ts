@@ -32,7 +32,6 @@ export type EditorCommand =
   | "math-block"
   | "image"
   | "horizontal-rule"
-  | "toggle-outline"
   | "toggle-typewriter"
   | "toggle-focus-mode";
 
@@ -43,7 +42,6 @@ export type WebviewSettings = {
   editorFontSize: number;
   editorFontFamily: string;
   lineWidth: number;
-  showOutline: boolean;
   typewriter: boolean;
   focusMode: boolean;
   spellcheck: boolean;

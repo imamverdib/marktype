@@ -89,11 +89,6 @@
         "category": "MarkType"
       },
       {
-        "command": "marktype.toggleOutline",
-        "title": "Toggle Outline",
-        "category": "MarkType"
-      },
-      {
         "command": "marktype.toggleTypewriterMode",
         "title": "Toggle Typewriter Mode",
         "category": "MarkType"
@@ -373,12 +368,6 @@
         "key": "ctrl+s",
         "mac": "cmd+s",
         "when": "activeCustomEditorId == 'marktype.editor'"
-      },
-      {
-        "command": "marktype.toggleOutline",
-        "key": "ctrl+shift+o",
-        "mac": "cmd+shift+o",
-        "when": "activeCustomEditorId == 'marktype.editor'"
       }
     ],
     "menus": {
@@ -507,10 +496,6 @@
           "when": "activeCustomEditorId == 'marktype.editor'"
         },
         {
-          "command": "marktype.toggleOutline",
-          "when": "activeCustomEditorId == 'marktype.editor'"
-        },
-        {
           "command": "marktype.openSource",
           "when": "activeCustomEditorId == 'marktype.editor'"
         },
@@ -553,11 +538,6 @@
           "minimum": 28,
           "maximum": 90,
           "description": "Width of the text column, in rem. Smaller is easier to read."
-        },
-        "marktype.showOutline": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the heading outline beside the document."
         },
         "marktype.typewriterMode": {
           "type": "boolean",

@@ -139,7 +139,6 @@ pub fn build<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
     let insert_menu = insert_menu.build()?;
 
     const VIEW_ITEMS: &[Item] = &[
-        item("toggle-outline", "Toggle Outline", Some("CmdOrCtrl+\\")),
         item("toggle-theme", "Toggle Dark Mode", Some("CmdOrCtrl+Shift+D")),
         item("toggle-typewriter", "Typewriter Mode", Some("CmdOrCtrl+Alt+P")),
         item("toggle-focus-mode", "Focus Mode", Some("CmdOrCtrl+Alt+F")),

@@ -45,7 +45,6 @@ const GROUPS: { title: string; items: [string, string][] }[] = [
   {
     title: "View",
     items: [
-      ["Toggle outline", "Mod+\\"],
       ["Dark mode", "Mod+Shift+D"],
       ["Source mode", "Mod+/"],
       ["Typewriter mode", "Mod+Alt+P"],
